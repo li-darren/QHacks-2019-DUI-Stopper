@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">body {
+  background-color: black;
+  animation-name: changeColor;
+  animation-duration: 3s;
+  animation-iteration-count: 100;
+  animation-direction: alternate;
+}
+
+@keyframes changeColor {
+  from {background-color: black;}
+  to {background-color: #001830;}
+}
+
+#printReactionTime {
+  font-family: Verdana, Geneva, sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+}
+
+#box {
+        width: 20px;
+        height: 20px;
+        display: none;
+        position: relative;
+        animation-name: changeSize;
+        animation-duration: 0.5s;
+        animation-iteration-count: 100;
+        animation-direction: alternate;
+    }
+    
+@keyframes changeSize {
+  from {transform: scale(1);}
+  to {transform: scale(1.2);}
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+}</style>
+  <title>
+    
+  </title>
+</head>
+<body>
+
+    <div id="box"></div>
+    <p id="printReactionTime"></p>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+      <p id="someText"></p>
+  </div>
+  </div>
+  <script>
+function getColor() {
+  var index = Math.floor(Math.random() * 10);
+  var ColorValue = "";
+  if (index % 2 == 0){
+    ColorValue = "e21818"; // red
+  }
+  else{
+    ColorValue = "2ead29";
+  } 
+  color = "#" + ColorValue;
+  //window.alert(color);
+  return color;
+}
+
+var clickedTime;
+var createdTime;
+var reactionTime;
+var clickedRed = 0;
+var clickedGreen = 0;
+
+document.getElementById("box").onclick = function() {
+  clickedTime = Date.now();
+  reactionTime = (clickedTime - createdTime) / 1000;
+  document.getElementById("printReactionTime").innerHTML =
+    "Reaction Time: " + reactionTime + "s";
+  this.style.display = "none";
+  makeBox();
+};
+
+function makeBox() {
+  var time = 1;
+  document.getElementById("box").style.borderRadius = "100px";
+  var top = Math.random();
+  top = top * 300;
+  var left = Math.random();
+  left = left * 1200;
+  document.getElementById("box").style.top = top + "px";
+  document.getElementById("box").style.left = left + "px";
+  var color = "#2ead29";
+  document.getElementById("box").style.backgroundColor = color;
+  document.getElementById("box").style.display = "block";
+  createdTime = Date.now();
+    
+  document.getElementById("box").addEventListener("click", function() {
+  if (_color == "#e21818") { // red
+    clickedRed++;
+    var stay = (Math.round(Math.random() * 4)) * 1000;
+    document.getElementById("box").style.display = "none";
+    else if (_color == "#2ead29") {
+        clickedGreen++;
+        _color = getColor();
+    }
+  }
+}
+
+var counter = 0;
+while(true){
+  makeBox();
+  counter++;
+}
+
+
+</script>
+</body>
+</html>
